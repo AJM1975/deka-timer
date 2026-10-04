@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: RaceSplit live app
+    url: https://racesplit.app
+    about: Open the production RaceSplit app
