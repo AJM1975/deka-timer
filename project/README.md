@@ -3,7 +3,9 @@
 RaceSplit is a mobile-first multi-event timing app for DEKA-style and custom fitness events.
 
 **Live domain:** https://racesplit.app  
-**Repository:** https://github.com/AJM1975/deka-timer
+**Repository:** https://github.com/AJM1975/racesplit  
+**Work queue:** https://github.com/AJM1975/racesplit/issues  
+**Log new work:** https://github.com/AJM1975/racesplit/issues/new/choose
 
 ## Current status
 
@@ -24,6 +26,7 @@ RaceSplit is a mobile-first multi-event timing app for DEKA-style and custom fit
 - Race history saved on the device
 - CSV and JSON export
 - Custom domain configured: racesplit.app
+- Cloudflare Web Analytics
 
 ## Current focus
 
@@ -38,10 +41,12 @@ RaceSplit is a mobile-first multi-event timing app for DEKA-style and custom fit
 
 | Area | Purpose |
 |---|---|
+| [Workflow](WORKFLOW.md) | How ideas/bugs become deployed changes |
 | [Roadmap](ROADMAP.md) | What is next and what is later |
 | [Architecture](ARCHITECTURE.md) | How the app is structured |
 | [Decision Log](DECISIONS.md) | Why key product decisions were made |
 | [Release Notes](RELEASES.md) | Changes shipped over time |
+| [GitHub Issues](https://github.com/AJM1975/racesplit/issues) | Live work queue |
 
 ## Working rules
 
@@ -70,4 +75,5 @@ A change is done when:
 - it does not break saved templates/results,
 - race timing remains accurate after correction/undo,
 - the change is committed to GitHub,
+- production is verified,
 - and the release notes are updated when user-facing.
