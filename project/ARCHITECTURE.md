@@ -5,12 +5,13 @@
 RaceSplit is currently a single-page browser application hosted on GitHub Pages.
 
 ### Hosting
-- GitHub repository: `AJM1975/deka-timer`
+- GitHub repository: `AJM1975/racesplit`
 - Branch: `main`
 - Entry point: `index.html`
 - Custom domain: `racesplit.app`
 - DNS: Porkbun
 - Hosting: GitHub Pages
+- Analytics: Cloudflare Web Analytics
 
 ### Storage
 Current user data is stored locally in the browser/device.
