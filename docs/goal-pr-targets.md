@@ -2,7 +2,7 @@
 
 Open **Goal / PR setup** above the clocks. Choose Off, Goal only, PR only or both. Enter individual split durations, or copy a compatible saved race into Goal, PR or both and adjust it. Apply one duration to every run without changing stations or transitions. Save commits the setup; Close/Escape cancels it.
 
-The compact comparisons sit below each live clock. Accumulated targets sum all splits through the current split, not the complete event while racing. Remaining/over describes the budget to that checkpoint. At finish, accumulated comparison changes to ahead/behind against the full event target. A missing preceding duration means no complete accumulated target (shown as —). The current-split comparison is hidden at finish, since the existing current clock resets to zero.
+The compact comparisons sit below each live clock. Accumulated targets sum all splits through the current split, not the complete event while racing. Comparison target values are green below target, red over target and neutral when equal or not running. There is no remaining/over countdown text. Screen-reader labels describe the comparison state. At finish, accumulated colour compares against the full event target. A missing preceding duration means no complete accumulated target (shown as —). The current-split comparison is hidden at finish, since the existing current clock resets to zero.
 
 PR is an editable personal-reference baseline selected by the user, not an automatically calculated record assembled from different races. Imports require the same ordered split names and types. Partial results preload recorded splits only. Loading or editing targets never changes the source result, live timing state, event template or cloud upload queue.
 
