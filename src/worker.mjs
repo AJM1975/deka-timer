@@ -6,6 +6,15 @@ export default {
         headers: { 'Cache-Control': 'no-store' }
       });
     }
+    if (url.pathname === '/api/storage/health') {
+      if (!env.DB) return Response.json({ ok: false, database: 'unbound' }, { status: 503, headers: { 'Cache-Control': 'no-store' } });
+      try {
+        const row = await env.DB.prepare("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'users'").first();
+        return Response.json({ ok: !!row, database: row ? 'ready' : 'migration-required' }, { status: row ? 200 : 503, headers: { 'Cache-Control': 'no-store' } });
+      } catch {
+        return Response.json({ ok: false, database: 'unavailable' }, { status: 503, headers: { 'Cache-Control': 'no-store' } });
+      }
+    }
     if (url.pathname.startsWith('/api/')) {
       return Response.json({ error: 'Not found' }, { status: 404 });
     }
