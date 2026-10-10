@@ -36,3 +36,7 @@ changes preserving displayed timing, Race Mode toggle, offline asset inventory a
 AA text/action contrast. Main labels and buttons use >=48px targets; split edits >=44px.
 Browser layout and physical iPhone/outdoor readability require staging visual validation.
 No database migration, external font request or change to server endpoints.
+# Header simplification after design approval
+
+The user approved the new design and requested removal of the old/new selector. The refreshed appearance is now always selected, including when a device previously saved `current`. The sun/Auto/moon control is in the top-right brand row. The optional high-visibility view is a compact Race view / Standard view toggle beside Goal/PR setup. Preview helper text is hidden. These changes do not alter account, race or target storage. The earlier immediate UI-switch instructions below describe the initial evaluation build only; rollback is now by a Git revert and service-worker cache bump. Keep the recorded baseline and do not delete local data during rollback.
+
