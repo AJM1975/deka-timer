@@ -1,3 +1,4 @@
+import { handleData } from './data-api.mjs';
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -15,6 +16,7 @@ export default {
         return Response.json({ ok: false, database: 'unavailable' }, { status: 503, headers: { 'Cache-Control': 'no-store' } });
       }
     }
+    if (url.pathname === '/api/me' || url.pathname.startsWith('/api/athletes') || url.pathname.startsWith('/api/races')) return handleData(request, env, url);
     if (url.pathname.startsWith('/api/')) {
       return Response.json({ error: 'Not found' }, { status: 404 });
     }
