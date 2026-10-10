@@ -30,12 +30,19 @@
 <p class="foot">RaceSplit · Feedback goes directly to the RaceSplit Project Hub Inbox.</p>
 </main>
 <script>
+const ENDPOINT='https://racesplit-feedback.sweetaz.chatgpt.site/feedback';
+const QUEUE='racesplit-feedback-outbox-v1';
+function readQueue(){try{return JSON.parse(localStorage.getItem(QUEUE)||'[]')}catch{return []}}
+function writeQueue(items){localStorage.setItem(QUEUE,JSON.stringify(items))}
+async function flushFeedback(){if(!navigator.onLine)return false;const queue=readQueue();let delivered=0;for(const item of queue){try{const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(item.payload)});if(!r.ok)break;delivered++}catch{break}}if(delivered)writeQueue(queue.slice(delivered));return readQueue().length===0}
+window.addEventListener('online',()=>flushFeedback().catch(()=>{}));
+flushFeedback().catch(()=>{});
 document.getElementById('raceFeedback').addEventListener('submit',async function(e){
-e.preventDefault();const g=id=>document.getElementById(id),button=g('fbSend');button.disabled=true;g('fbMessage').textContent='Sending…';
-try{
-const r=await fetch('https://racesplit-feedback.sweetaz.chatgpt.site/feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:g('fbType').value,title:g('fbTitle').value,body:g('fbBody').value,contact:g('fbContact').value,website:g('fbWebsite').value,page:location.origin+location.pathname})});
-if(!r.ok)throw Error();g('fbMessage').textContent='Thanks! Your feedback is in the RaceSplit Inbox.';this.reset()
-}catch(e){g('fbMessage').textContent='Could not send feedback. Your message is still here; please try again.'}finally{button.disabled=false}
+e.preventDefault();const g=id=>document.getElementById(id),button=g('fbSend');button.disabled=true;
+const payload={type:g('fbType').value,title:g('fbTitle').value,body:g('fbBody').value,contact:g('fbContact').value,website:g('fbWebsite').value,page:location.origin+location.pathname};
+try{const queue=readQueue();queue.push({id:crypto.randomUUID(),payload,queuedAt:new Date().toISOString()});writeQueue(queue);this.reset();g('fbMessage').textContent='Feedback saved on this device. Sending when online…';if(await flushFeedback())g('fbMessage').textContent='Thanks! Your feedback was sent.';else g('fbMessage').textContent='Feedback queued on this device; it will retry when this page is opened online.'}
+catch(err){g('fbMessage').textContent='Unable to save feedback on this device. Please copy your message and try again.'}
+finally{button.disabled=false}
 });
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token":"30dcd5856cfe4107956feb579e9c9361"}'></script><!-- End Cloudflare Web Analytics -->
