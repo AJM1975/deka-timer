@@ -17,8 +17,8 @@ Scope: feature/cloudflare-platform-foundation / PR #10 only. Production/main unc
 ## Deployment requirements / not yet validated
 1. Authenticate Wrangler against the existing Cloudflare account, or use its connected build integration.
 2. Run `npm run deploy:staging` (applies migration 0002 to racesplit-staging-db before deploying). Do not use production/main.
-3. Configure Worker secrets `RESEND_API_KEY`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`; configure `EMAIL_FROM` with an existing verified Resend sender.
-4. Register Google redirect URI `https://racesplit-staging.az-mcintosh.workers.dev/api/auth/google/callback` and staging authorized origin in Google's OAuth console.
+3. Configure Worker secrets `RESEND_API_KEY`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`; configure `RESEND_FROM_EMAIL` with an existing verified Resend sender.
+4. Register Google redirect URI `https://racesplit-staging.az-mcintosh.workers.dev/api/auth/callback/google` and staging authorized origin in Google's OAuth console.
 5. Verify `/api/health` build `auth-athletes-sync-v1`, `/api/storage/health`, `/api/auth/config`; then test real email delivery, Google consent, two-account isolation and cross-device sync.
 6. Physical iPhone QA: installed launch without connection, active race relaunch, pause/resume, save offline then sign in/sync, pending conflict, app upgrade and device restart. Existing prior offline-launch confirmation does not validate this sprint.
 7. Zuvlo update needs an authenticated session to staging.zuvlo.fyi. Record this sprint, test evidence, commit reference and credential/device-QA blockers. Do not mark deployment/provider/iPhone verification complete.
@@ -38,3 +38,7 @@ Scope: feature/cloudflare-platform-foundation / PR #10 only. Production/main unc
 - `/api/auth/config` returns `email: false, google: false`: provider credentials are absent. These capabilities remain unverified with real providers.
 - Latest Cloudflare check is marked failed after another build was triggered; no failure details are available through the GitHub connector. Deployment outcome is verified by live code, while the failed-build discrepancy remains open pending Cloudflare log access.
 - Zuvlo remains behind Cloudflare Access with no authenticated session. No Zuvlo records were changed.
+
+## Configuration alignment
+
+Concurrent staging commits 98c0e62 and c0bf0e6 configure the public Google client ID, `/api/auth/callback/google` and `RESEND_FROM_EMAIL`. Tests and setup notes now match these values. Live OAuth start returns 302 to Google with S256 PKCE and the configured callback. Latest live config: Google enabled, email disabled. Real Google login and email delivery remain unverified.
