@@ -40,3 +40,6 @@ No database migration, external font request or change to server endpoints.
 
 The user approved the new design and requested removal of the old/new selector. The refreshed appearance is now always selected, including when a device previously saved `current`. The sun/Auto/moon control is in the top-right brand row. The optional high-visibility view is a compact Race view / Standard view toggle beside Goal/PR setup. Preview helper text is hidden. These changes do not alter account, race or target storage. The earlier immediate UI-switch instructions below describe the initial evaluation build only; rollback is now by a Git revert and service-worker cache bump. Keep the recorded baseline and do not delete local data during rollback.
 
+## Compact header account control
+
+The full email address is removed from the persistent race header. A compact Signed in / Sign in account disclosure sits beside Ready/Live/Paused. Opening it shows the email, Account & sync link, and Sign out for an authenticated user. The existing logout workflow is reused, including its busy-sync guard. Saved device races and persisted pending uploads are not deleted by this UI change. Account management remains available in the existing Account & cloud sync section.
