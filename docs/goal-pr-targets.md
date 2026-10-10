@@ -11,3 +11,6 @@ Targets use separate local storage `racesplit-targets-v1`, keyed by athlete iden
 New files are included in the versioned service-worker cache. Revert this feature commit to remove the UI; preserve the independent storage key and bump the service-worker cache version for the rollback. Production remains unchanged.
 
 Validation: time parsing; source immutability; matching/partial/invalid imports; bulk run isolation; cumulative missing values; UI setup/save/cancel; athlete isolation; live clock preservation; existing offline/auth/sync regression suite. Real iPhone and offline/reconnect review remain useful before promotion.
+## Running screen space
+
+Start automatically selects high-visibility Race view. While running or paused, the Goal/PR setup and Standard view toolbar and its explanatory summary are hidden. A small Setup button in the header reveals this toolbar; Hide setup collapses it again. Revealing controls does not pause or change timing. At finish/reset the normal controls return. Appearance remains in the header; choosing Standard view also restores the toolbar. Setup visibility is transient, not persisted, while race view preference and timing continue to persist as before.
