@@ -1,0 +1,10 @@
+{
+  "name": "RaceSplit — Multi-Event Timer",
+  "short_name": "RaceSplit",
+  "description": "Offline-first race and multi-event timing",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0c1320",
+  "theme_color": "#0c1320"
+}
