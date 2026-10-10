@@ -42,3 +42,8 @@ Date: 2026-10-10
 - Keep timing operational when authentication/API/Zuvlo is unavailable.
 - Never deploy experimental timing logic to all users without regression tests.
 - Rotate previously shared Cloudflare API credentials before production configuration.
+
+## Staging deployment note
+- Cloudflare Workers Builds production branch is configured to `feature/cloudflare-platform-foundation`.
+- Worker deploy command should be `npx wrangler deploy` (without `--env staging`), because the staging Worker name is defined directly in `wrangler.jsonc`.
+- Verify that `.git/config` is inaccessible after deploying the public-only assets directory.
