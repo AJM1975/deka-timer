@@ -12,7 +12,7 @@ Scope: feature/cloudflare-platform-foundation / PR #10 only. Production/main unc
 - Mutation IDs make lost-response replay idempotent; revision checks prevent silent overwrite. Conflict UI preserves the local copy as a separate race. Soft-deletion tombstones propagate and deletion checks revisions.
 - Cloud pull merges other-device results without replacing pending local changes. Race snapshots retain template/stages/splits, pause metadata and athlete association; private cloud storage by default.
 - Cached PWA shell includes sync modules. Service-worker upgrades wait for existing clients to close; IndexedDB recovery runs before writing initial empty state.
-- 32 Node tests including SQLite-backed migrations/API integration. Mocked Resend and Google exchanges pass. Worker dry-run builds.
+- 33 Node tests including SQLite-backed migrations/API integration. Mocked Resend and Google exchanges pass. Worker dry-run builds.
 
 ## Deployment requirements / not yet validated
 1. Authenticate Wrangler against the existing Cloudflare account, or use its connected build integration.
@@ -30,3 +30,11 @@ Scope: feature/cloudflare-platform-foundation / PR #10 only. Production/main unc
 - Local results remain on a shared device after sign-out, disclosed in the UI; cookies/secrets are never stored in localStorage. Account switching never claims another owner's results.
 - Cloud history currently capped at 10,000 rows; pagination, richer conflict comparison, and multi-tab local-history coordination remain future work.
 - DOM tests verify offline local save, paused timer reload and IndexedDB recovery ordering. SQLite test adapter exercises SQL but is not a substitute for real D1 and physical Safari validation.
+
+## Staging evidence after implementation commit 4494f62
+
+- GitHub Actions push and PR checks passed.
+- Existing Cloudflare integration deployed the new code: live `/api/health` returns `build: auth-athletes-sync-v1`; live page contains the account UI.
+- `/api/auth/config` returns `email: false, google: false`: provider credentials are absent. These capabilities remain unverified with real providers.
+- Latest Cloudflare check is marked failed after another build was triggered; no failure details are available through the GitHub connector. Deployment outcome is verified by live code, while the failed-build discrepancy remains open pending Cloudflare log access.
+- Zuvlo remains behind Cloudflare Access with no authenticated session. No Zuvlo records were changed.

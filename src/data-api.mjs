@@ -7,6 +7,8 @@ export async function handleData(request,env,url){
  const user=await owner(request,env);
  if(!user)return json({error:'Authentication required'},401);
  const method=request.method;
+ const expectedAccount=request.headers.get('X-RaceSplit-Account');
+ if(expectedAccount&&expectedAccount!==user.id)return json({error:'Account changed. Sign in again.'},403);
  if(!['GET','HEAD'].includes(method)&&(!sameOrigin(request)||request.headers.get('X-RaceSplit-Account')!==user.id))return json({error:'Origin rejected'},403);
  if(url.pathname==='/api/me'&&method==='GET')return json({id:user.id,email:user.email,earlyAccess:!!user.early_access});
  if(url.pathname==='/api/athletes'&&method==='GET'){
