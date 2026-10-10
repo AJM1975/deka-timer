@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "test": "node --test tests/*.test.mjs",
-    "dev": "wrangler dev --env staging",
-    "deploy:staging": "wrangler deploy --env staging"
+    "dev": "wrangler dev",
+    "deploy:staging": "wrangler deploy"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
