@@ -24,3 +24,8 @@ Production remains on GitHub Pages. No production cutover without explicit appro
 - [ ] Validate existing Zuvlo endpoint, project routing, and authentication
 - [ ] Add durable server outbox and scheduled delivery with safe retry
 - [ ] Preserve existing feedback integration until verified
+
+## D1 staging deployment
+- Cloudflare build deploy command configured by operator to run remote D1 migrations before Worker deployment (2026-10-10).
+- Validate the build log and `/api/storage/health` before using any cloud tables.
+- After successful migration, restore deploy command to `npx wrangler deploy`; run migrations as a controlled separate step on future releases.
